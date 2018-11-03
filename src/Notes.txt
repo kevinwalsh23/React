@@ -1,0 +1,43 @@
+React Components: State and Props
+
+Each component can store its own local information in its State
+Only class components can have local State
+State declared within constructor 
+this.state = {}
+
+State should be modified only using setState()
+JSX attributes passe into copmonent as single object
+accessed with this.props.variable
+State information passed to child compnents as props
+Handling Events
+similiar to way you how events on Dom elements
+use camelCase
+
+<Card OnClick={() => this.onDishSelect(dish)}>
+
+Lifting State Up
+-several components can share same data
+--can send data back up to ancestor components
+
+Lists and Keys
+handled similiar to javascript
+map js function allows to iterate over Lists
+Keys should be given to elements in the array
+Unique ids allow for all items to be properly iterated over
+Ids let react know what items have been removed/added
+React only modifies only parts of DOM tree that needs to be updated
+
+Pass information to child component from parent component using props
+List state data up to parent, make available to all other children components through props
+
+React Components: Lifecycle Methods
+React app made of multiple react components
+Creation > Mounting > Updating > Unmounting > disapearance 
+
+Mounting Methods
+called when instance of component is being created and inserted in the DOM
+constructor()
+getDerivedStateFromProps()
+render()
+componentDidMount()
+componentWillMount() older method that is deprecated
