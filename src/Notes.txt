@@ -41,3 +41,6 @@ getDerivedStateFromProps()
 render()
 componentDidMount()
 componentWillMount() older method that is deprecated
+
+Components
+props > properties or the data for the component
