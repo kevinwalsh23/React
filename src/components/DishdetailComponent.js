@@ -1,28 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Row, Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem } from 'reactstrap';
-
-class DishDetail extends Component {
-    //define constructor
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            
-            //state stores properties related to component
-        }
-
-    }
-    //create function to adjust the pageview on state changed on dishselected
-    renderDish(selectedDish) {
+   //create function to adjust the pageview on state changed on dishselected
+    function RenderDish({dish}) {
         //console.log(this.props.dish);
         //if dish state exists, make these changes, else return empty div
-        if (selectedDish != null)
+        if (dish != null)
             return(
                 <Card>
-                    <CardImg top src={selectedDish.image} alt={selectedDish.name} />
+                    <CardImg top src={dish.image} alt={dish.name} />
                     <CardBody>
-                        <CardTitle>{selectedDish.name}</CardTitle>
-                        <CardText>{selectedDish.description}</CardText>
+                        <CardTitle>{dish.name}</CardTitle>
+                        <CardText>{dish.description}</CardText>
                     </CardBody>
                 </Card>
             );
@@ -31,11 +19,11 @@ class DishDetail extends Component {
                 <div></div>
             );
     }
-    renderComments(selectedDish) {
+    function RenderComments({comments}) {
         //if dish state exists, make these changes, else return empty div
-        if (selectedDish != null) {
-            if (selectedDish.comments != null) {
-                const comments = selectedDish.comments.map((comment) => {
+        if (comments != null) {
+            if (comments.comments != null) {
+                const comment = comments.comments.map((comment) => {
                     return (
                         <div key={comment.id} className="col-12">
                             <ListGroupItem>
@@ -49,7 +37,7 @@ class DishDetail extends Component {
                 return(
                     <div>
                         <h4 className="col-12">Comments</h4>
-                        <ListGroup className="col-12"> {comments} </ListGroup>
+                        <ListGroup className="col-12"> {comment} </ListGroup>
                     </div>
                 )
             }
@@ -57,27 +45,23 @@ class DishDetail extends Component {
                 return(
                     <div></div>
                 )
-
-
-        }
-              
+        }             
         else 
             return(
                 <div></div>
             );
     }           
 
-
-    render() {
+    const  DishDetail = (props) => {
         return ( 
             <div className="container">
                 <Row>
                     <div className="col-12 col-md-5 m-1">
-                        {this.renderDish(this.props.dish)}
+                        <RenderDish dish={props.dish}/>
                     </div>
 
                     <div className="col-12 col-md-5 m-1">
-                        {this.renderComments(this.props.dish)}
+                        <RenderComments comments={props.dish}/>
                     </div>
 
                 </Row>
@@ -85,7 +69,7 @@ class DishDetail extends Component {
 
         );
     }
-}
+
 
 //allows other files to import component
 export default DishDetail;
