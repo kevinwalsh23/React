@@ -44,3 +44,24 @@ componentWillMount() older method that is deprecated
 
 Components
 props > properties or the data for the component
+
+Dish Detail component only took props, no state
+Presentational component because only dependent on input
+Container component, store state and pass to children
+Skinny; just render the view
+fat: track more data in state
+
+Presentational
+-mainly concerned with rendering the view aka markup
+Render view based on data passed in through props
+Do not maintain own local state
+Depend on parent to pass in app state to render view
+
+Container:
+responsible for making things work: data fetching, state updates
+make use of presentational components for the actual rendering
+can wrap presentational components in wrapping divs
+Not responsible for contructing views
+Provide data to presentational component in terms of props
+Maintain state and communicate with data sources
+

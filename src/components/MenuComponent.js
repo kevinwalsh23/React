@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
-import DishDetail from './DishdetailComponent';
 
 class Menu extends Component {
     //define constructor
@@ -8,17 +7,12 @@ class Menu extends Component {
         super(props);
 
         this.state = {
-            selectedDish: null
             //state stores properties related to component
         }
 
     }
 
-    //create function to adjust state when dish is selected
-    onDishSelect(dish) {
-        this.setState({ selectedDish: dish});
 
-    }
 
     //create function to adjust the pageview on state changed on dishselected
     renderDish(dish) {
@@ -47,7 +41,7 @@ class Menu extends Component {
         const menu = this.props.dishes.map((dish) => {
             return (
                 <div key={dish.id} className="col-12 col-md-5 m-1">
-                    <Card key={dish.id} onClick={() => this.onDishSelect(dish)}>
+                    <Card key={dish.id} onClick={() => this.props.onClick(dish.id)}>
                         <CardImg width="100%" src={dish.image} alt={dish.name} />
                         <CardImgOverlay>
                             <CardTitle>{dish.name}</CardTitle>
@@ -64,7 +58,6 @@ class Menu extends Component {
                 <div className="row">
                     {menu}
                 </div>
-                <DishDetail selectedDish={this.state.selectedDish}/>
             </div>
         );
     }
