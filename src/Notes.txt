@@ -65,3 +65,24 @@ Not responsible for contructing views
 Provide data to presentational component in terms of props
 Maintain state and communicate with data sources
 
+React Lifecycle Methods
+
+Functional Components
+simplest way to define React components
+JS function that returns a React Element, or collection of react elements
+Receives props as parameter
+Cannot have local state of access lifecycle hooks
+
+React Virtual DOM
+Browser DOM is browser object
+Virtual DOm is React object
+-lightweight representation of browser DOM
+-in memory tree data structure of plain js objects
+-manipulations extremely fast compared to modifying browser DOM
+created completely from scratch on every setState
+
+Updating DOM
+Diffing algo will detect all nodes that are changed
+updates enture subtree if diffing detects two elements are of diff types
+using key you can hint child elements as stable
+no need to re render where keys do not change
