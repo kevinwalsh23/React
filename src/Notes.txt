@@ -86,3 +86,50 @@ Diffing algo will detect all nodes that are changed
 updates enture subtree if diffing detects two elements are of diff types
 using key you can hint child elements as stable
 no need to re render where keys do not change
+React Fiber is new reconciliation algo in React 16
+Incremental rendering
+
+React Router
+Navigating through views
+Collection of navigational components
+enables navigation among views
+Router components, route matching components and navigation components
+
+Uses a browser based b
+Web App Routing
+install react-router-Dom
+<Browser Router>
+creates specialized history object
+Also <HashRouter> if you are using static file server
+Enclose your app in Browser Router
+
+Route matching
+<Route and Switch>
+<Route> component prop specifies corresponding view for the location. url for the view
+Route components prop specifies corresponding view for the location
+Exact attribute ensures path must be exactly matched
+Redirect component enable default route specification
+Switch enables grouping together several routes
+iterates over all children to find first one that matches the path
+
+navigation
+<Link or navlink copmonents>
+Link creates links in your application
+will render as a tag in html
+Navlink also attaches the active class to the link when its prop matches the current location
+
+Single Page Applications (SPA)
+Website or application that fits into an ensingletire Page
+Do not need to reload entire application each time you request
+Once initial webapp downloaded, most other interactions are similiar to interacting with desktop application
+Most resources retrieved with single page load
+redraw parts of the page when needed without requireing full server roundtrip
+
+Challenges
+-SEO
+-Partitioning the responsibility between the client and server
+-Server acts as data source and work offloaded to client specialized
+-Maintaining history, clicking back button or forward button, where do you take the user?
+-Analytics
+-Speeding up initial page load
+-Can do partial rendering
