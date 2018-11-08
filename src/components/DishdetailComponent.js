@@ -1,6 +1,7 @@
 import React from 'react';
-import { Row, Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem } from 'reactstrap';
-   //create function to adjust the pageview on state changed on dishselected
+import { Row, Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom'; 
+//create function to adjust the pageview on state changed on dishselected
     function RenderDish({dish}) {
         //console.log(this.props.dish);
         //if dish state exists, make these changes, else return empty div
@@ -20,51 +21,55 @@ import { Row, Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroup
             );
     }
     function RenderComments({comments}) {
+        //console.log(comments);
         //if dish state exists, make these changes, else return empty div
         if (comments != null) {
-            if (comments.comments != null) {
-                const comment = comments.comments.map((comment) => {
-                    return (
-                        <div key={comment.id} className="col-12">
-                            <ListGroupItem>
-                                 <div className="col-12">{comment.comment}</div>
-                                 <div className="col-12">--{comment.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))} </div>
-                            </ListGroupItem>
-                            
-                        </div>
-                    );
-                });
-                return(
-                    <div>
-                        <h4 className="col-12">Comments</h4>
-                        <ListGroup className="col-12"> {comment} </ListGroup>
+            const comment = comments.map((comment) => {
+                return (
+                    <div key={comment.id} className="col-12">
+                        <ListGroupItem>
+                                <div className="col-12">{comment.comment}</div>
+                                <div className="col-12">--{comment.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))} </div>
+                        </ListGroupItem>
+                        
                     </div>
-                )
-            }
-            else
-                return(
-                    <div></div>
-                )
-        }             
-        else 
+                );
+            });
+            return(
+                <div>
+                    <h4 className="col-12">Comments</h4>
+                    <ListGroup className="col-12"> {comment} </ListGroup>
+                </div>
+            )
+        }
+        else
             return(
                 <div></div>
             );
-    }           
+    }             
+          
 
     const  DishDetail = (props) => {
         return ( 
             <div className="container">
-                <Row>
-                    <div className="col-12 col-md-5 m-1">
-                        <RenderDish dish={props.dish}/>
-                    </div>
-
-                    <div className="col-12 col-md-5 m-1">
-                        <RenderComments comments={props.dish}/>
-                    </div>
-
-                </Row>
+            <div className="row">
+                <Breadcrumb>
+                    <BreadcrumbItem><Link to="/menu">Menu</Link> </BreadcrumbItem>
+                    <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                </Breadcrumb>
+                <div className="col-12">
+                    <h3>{props.dish.name}</h3>
+                    <hr />                    
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-12 col-md-5 m-1">
+                    <RenderDish dish={props.dish} />
+                </div>
+                <div className="col-12 col-md-5 m-1">
+                    <RenderComments comments={props.comments} />
+                </div>
+            </div>
             </div>
 
         );
