@@ -133,3 +133,19 @@ Challenges
 -Analytics
 -Speeding up initial page load
 -Can do partial rendering
+
+Parameters
+React Router
+paths specified by urls
+can carry parameter values ie /menu43 for dish 43
+Route parameters specifie in path specification as a token
+path: menu/:id where id is token
+
+Route parameters can be specified using a link parameter specifying the link
+eg <Link to{'menu/${dish.id)'}>
+Route passes three components to the component
+-match (route params), location (where you are) and history (allow you to go back)
+
+match object
+provides information about how a <Route path> matched the url
+match.params as a key value pair 
