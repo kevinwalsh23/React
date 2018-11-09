@@ -149,3 +149,17 @@ Route passes three components to the component
 match object
 provides information about how a <Route path> matched the url
 match.params as a key value pair 
+
+Controlled Forms
+Form inputs in state of component
+Form validation (client side)
+Each form element maintains own state 
+Can set initial value in state for form values
+
+Makes react component control form it renders
+single source of truth
+tying form state to component state
+controlled component
+form state and component state will match
+Every state mutation will have an assocaited handler function
+

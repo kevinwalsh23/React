@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom'; 
 //create function to adjust the pageview on state changed on dishselected
     function RenderDish({dish}) {
