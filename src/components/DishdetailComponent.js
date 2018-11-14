@@ -1,6 +1,108 @@
-import React from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem, Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import { Link } from 'react-router-dom'; 
+import React, { Component } from 'react';
+import { Card, CardImg, CardText, CardBody, CardTitle, ListGroup, ListGroupItem, Breadcrumb, BreadcrumbItem, Col, Button, Modal, ModalHeader, ModalBody, FormGroup, Form, Label, Input, Row } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { Control, LocalForm, Errors } from 'react-redux-form';
+
+const required = (val) => val && val.length;
+const maxLength = (len) => (val) => !(val) || (val.length <= len);
+const minLength = (len) => (val) => (val) && (val.length >= len);
+
+class CommentForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isModalOpen: false
+        };
+        //specifying toggleNav is available to use and bound to 'this'
+        this.toggleModal = this.toggleModal.bind(this);
+    }
+
+    toggleModal() {
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+        });
+    }
+    handleSubmit(values) {
+        console.log("Current State is: " + JSON.stringify(values));
+        alert("Current State is: " + JSON.stringify(values));
+        //event.preventDefault();
+    }
+
+    render() {
+        return(
+           <div>
+                <Button type="submit" className="m-4 fa fa-pencil" outline onClick={this.toggleModal}>
+                     <span> </span>Submit Comment
+                </Button>
+                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                    <ModalHeader isOpen={this.state.isModalOpen} toggle={this.toggleModal}>Submit Comment</ModalHeader>
+                    <ModalBody>
+                    <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                            <Row className="FormGroup">
+                                <Label htmlFor="rating" md={2}>Rating</Label>
+                                <Col md={12}>
+                                    <Control.select model=".rating" id="rating" name="rating"
+                                        placeholder="Rating"
+                                        className="form-control"
+                                        defaultValue={{ label: "rating", value: 1}}>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    </Control.select>
+                                </Col>
+                            </Row>
+                            <Row className="FormGroup">
+                                <Label htmlFor="yourname" md={12}>Your Name</Label>
+                                <Col md={12}>
+                                    <Control.text model=".yourname" id="yourname" name="yourname"
+                                        placeholder="Your Name"
+                                        className="form-control"
+                                        validators={{
+                                            required, minLength: minLength(3), maxLength: maxLength(15)
+                                        }}
+                                         />
+                                    <Errors
+                                        className="text-danger"
+                                        model=".yourname"
+                                        show="touched"
+                                        messages={{
+                                            required: 'Required',
+                                            minLength: 'Must be greater than 2 characters',
+                                            maxLength: 'Must be 15 characters or less',
+                                        }}
+                                    />
+                                    
+                                </Col>
+                            </Row>
+                            <Row className="FormGroup">
+                                <Label htmlFor="message" md={12}>Comment</Label>
+                                <Col md={12}>
+                                   <Control.textarea model=".message" id="message" name="message"
+                                        rows="6"
+                                        className="form-control" />
+                                </Col>
+                            </Row>
+                            <br></br>
+                            <Row className="FormGroup">
+                                <Col md={{size:12}}>
+                                    <Button type="submit" color="primary" >
+                                    <span>Submit</span>
+                                    </Button>
+      
+                                </Col>
+                            </Row>
+                        </LocalForm>
+                    </ModalBody>
+                </Modal>
+
+            </div>
+        );
+    }
+}
+
+
 //create function to adjust the pageview on state changed on dishselected
     function RenderDish({dish}) {
         //console.log(this.props.dish);
@@ -33,20 +135,24 @@ import { Link } from 'react-router-dom';
                         </ListGroupItem>
                         
                     </div>
+
                 );
             });
             return(
                 <div>
                     <h4 className="col-12">Comments</h4>
                     <ListGroup className="col-12"> {comment} </ListGroup>
+                    <CommentForm/>
                 </div>
-            )
+            );
         }
         else
             return(
                 <div></div>
             );
-    }             
+    }
+    
+
           
 
     const  DishDetail = (props) => {
