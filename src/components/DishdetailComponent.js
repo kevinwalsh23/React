@@ -44,7 +44,7 @@ class CommentForm extends Component {
                                     <Control.select model=".rating" id="rating" name="rating"
                                         placeholder="Rating"
                                         className="form-control"
-                                        defaultValue={{ label: "rating", value: 1}}>
+                                        defaultValue="1">
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
