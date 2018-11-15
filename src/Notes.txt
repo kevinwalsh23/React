@@ -163,3 +163,100 @@ controlled component
 form state and component state will match
 Every state mutation will have an assocaited handler function
 
+Uncontrolled Components
+allows you to handle form data by dom itself
+instead of event handler use a ref to get form values from the DOm
+easier to integrate react with non react compared
+
+Model View Controller Framework (MVC)
+Design Patterns
+-Well documented solution for recurring problem
+also referred to as a architechtrual Pattern
+Software design Pattern
+reusable solution to commnly occuring problems
+isolates domain logic from user interface
+permits independent development, testing and maintainance (separation of concerns)
+Model
+mananges behavior and data of application  
+responds to requests for information about its state
+responds to instructions to change state
+in event driven systems, model notifies observers when information changes so they can react
+View
+renders the model into a form suitable for interaction, typically UI element
+multiple views can exist for a single model for different purposes
+viewport typically has one to one correspondence with a display surface and knows how to render it
+Controller
+receives user input and initiate response by making calls on model objects
+controller accepts input from user and instructs model and viewport to perform action based on that input
+
+Flux Architecture
+React initially viewed as the V in MVC
+FB found issues with MVC approach
+discarded in favor of Fluxproblems with cascading updates, decentralized mutations, race conditions
+Unidirectional Data Flow
+Action > Dispatcher > Store > View
+
+Redux
+Derives a lot from Flux
+predictable state container for Javascript apps 
+not directly related to react
+makes state mutations predictable
+Main Priciples
+Single Source of truth
+single state object tree within a single store
+state is read only (only gets, no sets)
+changes should only be done through Actions 
+Changes are made with pure functions
+take previous state and action and return next state
+no mutation of the previous state 
+enables powerful techniques
+logging
+API Handling
+undo and redo 
+state persistence 
+time travel debugging 
+State: stored in plain JS object
+Action: plain JS object with a type field that specifies how to changr something in the state
+Reducer: pure functions that take the current state and action and return a new state
+update data immutably (previous state not modified, new state created)
+Redux Store
+holds current state value
+created using createStore()
+Supplies three Methods
+dispatch(): states state update with the provided action object
+getState(): returns current stored state value
+subscribe: accepts a callback function that will run every time an action is dispatched
+React-redux package for bindings between react and redux
+connect():
+generates a wrapper 'container' copmonent that subscribes to the store
+Surround your App root with <Provider>
+takes the stor as an attribute
+makes store accessible to all connected components
+connect(): function takes two optional args
+mapstatetoprops: called evry time store state changes. returns object full of data with each field being a prop for the wrapped component
+mapDispatchtoprops(); receives the dispath() method and should return an object full of functions that use dispatch()
+
+Redux Actions
+actions: payloads of information that send data from application to the store
+done with store.dispatch()
+Plain JS object
+type property indicates type of action to be performed
+best supported by defining action types as string objects
+rest of object contains data necessary for action
+
+Action Creators
+functions that create actions
+encapsulates process of creating action object
+return action object
+resulting action object can be passed to the store through dispatch()
+Reducers take previosus state and action and return the next state
+do not mutate state
+make copy and modify copy before returning
+actions handled through a switch statement switching on action type
+return previous state in default case 
+
+Splitting and Combining Reducers
+depending on state shape, fields and updates can be decoupled
+split reducer into simpler reducer functions that operate on only some of the fields
+manages parts slices of global state
+Combine the simpler functions to generate the overall state

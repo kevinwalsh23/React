@@ -23,6 +23,8 @@ class CommentForm extends Component {
         });
     }
     handleSubmit(values) {
+        this.toggleModal();
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
         console.log("Current State is: " + JSON.stringify(values));
         alert("Current State is: " + JSON.stringify(values));
         //event.preventDefault();
@@ -54,9 +56,9 @@ class CommentForm extends Component {
                                 </Col>
                             </Row>
                             <Row className="FormGroup">
-                                <Label htmlFor="yourname" md={12}>Your Name</Label>
+                                <Label htmlFor="author" md={12}>Your Name</Label>
                                 <Col md={12}>
-                                    <Control.text model=".yourname" id="yourname" name="yourname"
+                                    <Control.text model=".author" id="author" name="author"
                                         placeholder="Your Name"
                                         className="form-control"
                                         validators={{
@@ -65,7 +67,7 @@ class CommentForm extends Component {
                                          />
                                     <Errors
                                         className="text-danger"
-                                        model=".yourname"
+                                        model=".author"
                                         show="touched"
                                         messages={{
                                             required: 'Required',
@@ -77,9 +79,9 @@ class CommentForm extends Component {
                                 </Col>
                             </Row>
                             <Row className="FormGroup">
-                                <Label htmlFor="message" md={12}>Comment</Label>
+                                <Label htmlFor="comment" md={12}>Comment</Label>
                                 <Col md={12}>
-                                   <Control.textarea model=".message" id="message" name="message"
+                                   <Control.textarea model=".comment" id="comment" name="comment"
                                         rows="6"
                                         className="form-control" />
                                 </Col>
@@ -122,7 +124,7 @@ class CommentForm extends Component {
                 <div></div>
             );
     }
-    function RenderComments({comments}) {
+    function RenderComments({comments, addComment, dishId}) {
         //console.log(comments);
         //if dish state exists, make these changes, else return empty div
         if (comments != null) {
@@ -142,7 +144,7 @@ class CommentForm extends Component {
                 <div>
                     <h4 className="col-12">Comments</h4>
                     <ListGroup className="col-12"> {comment} </ListGroup>
-                    <CommentForm/>
+                    <CommentForm dishId={dishId} addComment={addComment}/>
                 </div>
             );
         }
@@ -173,7 +175,9 @@ class CommentForm extends Component {
                     <RenderDish dish={props.dish} />
                 </div>
                 <div className="col-12 col-md-5 m-1">
-                    <RenderComments comments={props.comments} />
+                    <RenderComments comments={props.comments} 
+                    addComment={props.addComment}
+                    dishId={props.dish.id}/>
                 </div>
             </div>
             </div>
