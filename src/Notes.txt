@@ -260,3 +260,188 @@ depending on state shape, fields and updates can be decoupled
 split reducer into simpler reducer functions that operate on only some of the fields
 manages parts slices of global state
 Combine the simpler functions to generate the overall state
+
+Redux Thunk & Middleware
+middleware that allows you to return a function rather than action
+loggar middleware prints log of actions initiated on redux store
+capability to run code after an action is dispatched but befor reaches reducer
+-3p extension point
+-loggin, async API calls
+-server calls
+Middleware:
+-forms pipeline that wraps around the dispatch()
+-pass actions onward
+-restart the dispatch pipeline
+-access the store state
+Middleware used for:
+-inspecting actions and the state
+-modify actions
+-dispatch other actions
+-stop actions from reaching Reducers
+
+applyMiddleware() function
+sets up middleware pipelinereturns a "store enhancer" that is passed top createStore
+
+Thunk
+subroutine that injects ad additional calculation in another subroutine
+-delay a calculation until it is needed
+-insert operations at beginning or end of other subroutine
+
+Redux Thunk
+Middleware that allows you to write an action creator than returns a function rather than action
+-can be used to delay dispatch of an action
+-dispatch only if certain condition met
+Inner function receives the dispath() and getState() store Methods
+can examine state and see if action fits and can be allowed with current state
+Useful complex synchronous logic
+multiple dispatches
+conditional dispatches 
+simple async logic
+
+REdux Saga: es6 generators to control pausable functions
+-complex async logic
+-ongoing background thread like processing behavior
+
+Networking Essentials
+
+REST Representational State Transfer
+Web Services: designed to support interoperability of systems connect over a network 
+SOA Service oriented Architecture
+SOAP Simple Object Access Protocol
+uses wsdl web services description language, xml based
+REST
+use web standards
+exchange data using xml or json
+simpler compared to SOAP, wsdl
+
+Representational State Transfer
+for distributed hypermedia systems like www
+collection of network architechtrual principles whjich outline how resources are designed and addressed
+1. http methods explicitly
+2. be stateless - server doesnt store any information about the state
+3. expose directory like URIs
+4. Transfer using XML or JSON or both but typically JSON
+
+motivation was to capture chars of web that made web successful
+-URI uniform resource indicator addressable resources
+-http Protocol
+-make a request -> receive response -> display response
+Explouts use of HTTP protocol behond http post and http get
+-http put, http DELETE 
+preserve idemptence
+
+Nouns (resources) (unconstrained)
+resources
+key absractio of information in REST is a resource
+A resource is a conceptual mapping to a set of entities
+REpresented with global identifier (URL in HTTP)
+any information can be named a resource
+REST uses URI to identify resources
+ie http://www.conFusion.food/dishes/
+as you traverse path you go from more generic to more specific
+
+Verbs (constrained)
+Represent actions to be performed
+Get > read
+Post > create 
+Put > update
+delete > delete
+
+HTTP Get
+used by clients to requests information
+isseing a get requests transfers the data from the server to the client in some representation
+Get http://www.confusion.food/dishes/452
+
+HTTP Post creates a resources
+content included in body of request
+Content: {first name, last name}
+
+HTTP PUT updates a resource
+can send partial or complete update
+
+HTTP DELETE removes the resource identified by the URI
+
+Representations (constrained)
+How data is represeneted or returned to the client for presentation
+
+Stateless Server
+Client side should track its own state:
+eg using cookies, client side database
+every request must include sufficient information for server to serve up the requested information
+client side mvc set up
+each request treated as a brand new request
+
+Promises
+promise: mechanism that supports async computation
+proxy for value not necessarily known when promise created
+represents value may be available now, later, or never
+new Promise ( function (resolve, reject) {...});
+solves callback hell (heavily nested callback code) problem
+promises can be chained- when deliveres can generate a new promise 
+can immediately return, Promise.resolve(result, Promise.reject(errpr)
+
+Fetch 
+communicating with the server 
+XMLHTTPRequest - outdated
+Fetch API modern replacement
+0provides interfaces for fetching resources (including accross the network)
+more powerful and flexible features
+promise based
+
+Fetch abstractions
+request: reps a resource request
+response: reps response to the request
+Headers: Rep response/request headers, allowing you to query them and take diff actions dependent on results
+Body: provides methods relating to the body of the response/request, allows you to declare content type and how to be handled
+
+Fetch Usage
+fetch(baseUrl + 'dishes)
+    .then(response => response.json())
+    .then(data => console.log(date))
+    (chaining of promises above)
+    .catch(error => console.log(error.message));
+
+Fetch Posting Data
+expliciting specify method if want to not use Get
+fetch(baseURL + 'dishes, {
+    method: 'POST',
+    body: JSON.stringify(newComment),
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    credentials: 'same-origin'
+})
+
+Fetch Dealing with Errors
+explicitly check status code if acceptable or error
+fetch(baseurl + 'dishes)
+    .then(response => {
+        if (response.ok) {
+            return response;
+        }
+        else {
+            var error = new Error('Error' + response.status + response.statusText);
+            error.response = response;
+            throw error;
+            (throwing error gets sent to the catch you implemented)
+        }
+    },
+    //never managed to communicate with the server
+    //promises allow you to give two callback functions
+    //rejection of promise handled
+    error => {
+        var errmess = New Error(error.message);
+        throw errmess;
+    }}
+
+Cross-Fetch
+can use fetch polyfill if browser does not support fetch (old browsers)
+library privides support for Fetch both in Node apps and browsers
+uses whatwg-fetch polyfill in browsers that do not have fetch support
+uses node-fetch for Node apps on server
+To use in app:
+import fetch from 'cross-fetch';
+
+Fetch alternatives
+Axios
+Superagent
