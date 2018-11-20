@@ -445,3 +445,32 @@ import fetch from 'cross-fetch';
 Fetch alternatives
 Axios
 Superagent
+
+
+React Animations
+React-transition-group
+React-animiation-components
+react transition group
+set of coponents for managing component states, including mounting and unmounting, designed with animation in mind
+components supported:
+transition:
+describe transition for one component state to another component over time
+-entering, entered, exiting and exited
+used to animate mounting and unmounting of a component
+the in props is used to toggle the transition state
+when true component begins sequence of entering to entered state
+timeout specifies duration spent in the entering state
+CSSTransition
+applies pair of class names during the appear, enter and exit stages
+uses in prop to decide when to apply the transition class
+classNames-="page"
+should define page-enter, page-enter-active, page-exit, page-exit-active
+
+Transition group
+manages set of <transition> components in a list
+automatically toggles the in prop for the components
+
+React Animation Components
+set of react components implemented using react-transition-group
+procides drop in GPU accelerated animiations and wrappers for group effects
+Fade, Transform, FadeTransform
