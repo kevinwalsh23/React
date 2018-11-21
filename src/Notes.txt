@@ -474,3 +474,30 @@ React Animation Components
 set of react components implemented using react-transition-group
 procides drop in GPU accelerated animiations and wrappers for group effects
 Fade, Transform, FadeTransform
+Wrapper components
+stagger, random, loop
+
+Webpack
+create-react-app to scafold app
+uses react scripts and npm modules under the hood
+internally uses webpack to build dist folder
+webpack comes built in
+webpack is a module bundler for modern js apps
+recursively builds a dependency graph that includes every module your app needs,
+then packages all of those modules into a small number of budles
+Bundle: javascript file that incorporates assets:
+-that belong together
+-treats everything as javascript
+-should be served to client in response to a single file request
+-may include js,css html or any other type of file
+Webpack examines your application source code for import statements
+-builds dependency graph
+-emits one or more bundles
+-use plugins to preprocess and minify non JS files: typescript, sass, less, exactly
+Configuration in webpack.config.js
+
+Webpack Concepts
+-Entry: the point where the webpack should start and follow the graph of dependencies
+-Output: where to bundle your app
+-Loaders: webpack only understands JS. webpack treats every file as a module. Loaders transform files into modules as they are added to the dependency graph
+-Plugs: perform actions and custom functionality on compilations or chunks of your bundled modules
